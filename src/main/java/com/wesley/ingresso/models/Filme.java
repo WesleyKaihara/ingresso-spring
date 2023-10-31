@@ -1,6 +1,9 @@
 package com.wesley.ingresso.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 import java.util.Date;
 
@@ -10,16 +13,18 @@ public class Filme {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(min = 5, max = 50, message = "Nome do filme é inválido")
     @Column(nullable = false)
     private String nome;
+
+    @Min(value = 0)
+    @Max(value = 600)
     @Column(nullable = false)
     private Integer duracaoMinutos;
     @Column(nullable = false)
     private Date dataLancamento;
 
-    public Filme() {
-
-    }
+    public Filme() {}
 
     public Filme(Long id, String nome, Integer duracaoMinutos, Date dataLancamento) {
         this.id = id;
